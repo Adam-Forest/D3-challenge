@@ -52,7 +52,7 @@ function yScale(health_data, chosenYAxis) {
         .domain([d3.min(health_data, d => d[chosenYAxis]) * 0.8,
         d3.max(health_data, d => d[chosenYAxis]) * 1.2
         ])
-        .range([0, height]);
+        .range([height, 0]);
 
     return yLinearScale;
 }
@@ -256,7 +256,7 @@ d3.csv("./assets/data/data.csv").then(function (health_data, err) {
             // .attr("y", -5000)
             // .attr("x", -5000)
             .classed("axis-text", true)
-        .attr("transform", `translate(${0 - margin.left / 4}, ${(height / 2)}), rotate(90)`);
+        .attr("transform", `translate(${-110 - margin.left / 4}, ${(height / 2)}), rotate(-90)`);
 
 
         
