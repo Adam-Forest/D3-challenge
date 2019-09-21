@@ -52,6 +52,28 @@
   border-radius: 4px;
 }
 
+.xlabel{
+  font-size: 26px;
+  fill: grey; 
+}
+
+.xlabel.active {
+  font-size: 28px;
+  fill: darkslategrey;
+  stroke: #89bdd3;
+}
+
+.ylabel.active {
+  font-size: 28px;
+  fill: darkslategrey;
+  stroke: #89bdd3;
+}
+
+.ylabel{
+  font-size: 26px;
+  fill: grey; 
+}
+
 /* Mobile Rules */
 @media screen and (max-width: 530px) {
   .stateText {

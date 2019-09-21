@@ -19,12 +19,8 @@ var margin = {
 var height = svgHeight - margin.top - margin.bottom;
 var width = svgWidth - margin.left - margin.right;
 
-// *****
-// SVG is naturally responsive, just set the viewBox
-// No need to redraw the chart every window resize.
-// *****
-
 // append SVG element to scatter div
+// viewBox so SVG is responsive
 var svg = d3
     .select("#scatter")
     .append("svg")
@@ -88,7 +84,7 @@ function renderText(textGroup, newXScale, chosenXAxis, newYScale, chosenYAxis) {
     textGroup.transition()
         .duration(1000)
         .attr("x", d => newXScale(d[chosenXAxis]))
-        .attr("y", d => newYScale(d[chosenYAxis]));
+        .attr("y", d => newYScale(d[chosenYAxis])+6);
 
     return textGroup;
 }
@@ -222,7 +218,7 @@ d3.csv("./assets/data/data.csv").then(function (health_data, err) {
         .append("text")
         .classed("stateText", "True")
         .attr("x", d => xLinearScale(d[chosenXAxis]))
-        .attr("y", d => yLinearScale(d[chosenYAxis]))
+        .attr("y", d => yLinearScale(d[chosenYAxis])+6)
         .text(function (d) { return d.abbr });
 
     // Create group for  2 x- axis labels
@@ -231,7 +227,7 @@ d3.csv("./assets/data/data.csv").then(function (health_data, err) {
 
     var povertyLabel = xlabelsGroup.append("text")
         .attr("x", 0)
-        .attr("y", 20)
+        .attr("y", 30)
         .attr("value", "poverty") // value to grab for event listener
         .classed("active", true)
         .classed("xlabel", true)
@@ -239,7 +235,7 @@ d3.csv("./assets/data/data.csv").then(function (health_data, err) {
 
     var ageLabel = xlabelsGroup.append("text")
         .attr("x", 0)
-        .attr("y", 40)
+        .attr("y", 70)
         .attr("value", "age") // value to grab for event listener
         .classed("inactive", true)
         .classed("xlabel", true)
@@ -247,7 +243,7 @@ d3.csv("./assets/data/data.csv").then(function (health_data, err) {
 
     var incomeLabel = xlabelsGroup.append("text")
         .attr("x", 0)
-        .attr("y", 60)
+        .attr("y", 110)
         .attr("value", "income") // value to grab for event listener
         .classed("inactive", true)
         .classed("xlabel", true)
@@ -266,7 +262,7 @@ d3.csv("./assets/data/data.csv").then(function (health_data, err) {
         
     var healthcareLabel = ylabelsGroup.append("text")
         .attr("x", 0)
-        .attr("y", 20)
+        .attr("y", 30)
         .attr("value", "healthcare") // value to grab for event listener
         .classed("active", true)
         .classed("ylabel", true)
@@ -274,7 +270,7 @@ d3.csv("./assets/data/data.csv").then(function (health_data, err) {
 
     var obesityLabel = ylabelsGroup.append("text")
         .attr("x", 0)
-        .attr("y", 40)
+        .attr("y", 70)
         .attr("value", "obesity") // value to grab for event listener
         .classed("inactive", true)
         .classed("ylabel", true)
@@ -282,7 +278,7 @@ d3.csv("./assets/data/data.csv").then(function (health_data, err) {
 
     var smokesLabel = ylabelsGroup.append("text")
         .attr("x", 0)
-        .attr("y", 60)
+        .attr("y", 110)
         .attr("value", "smokes") // value to grab for event listener
         .classed("inactive", true)
         .classed("ylabel", true)
