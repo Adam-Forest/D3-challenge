@@ -12,7 +12,7 @@ var margin = {
     top: 50,
     bottom: 150,
     right: 50,
-    left: 50
+    left: 150
 };
 
 // calculate chart size less margins
@@ -138,7 +138,7 @@ function updateToolTip(chosenXAxis, chosenYAxis, tipGroup) {
         .attr("class", "d3-tip")
         .offset([-10, 0])
         .html(function (d) {
-            return (`${d.state}<br>${label} ${d[chosenXAxis]}<br>${d[chosenYAxis]}`);
+            return (`${d.state}<br>${label} ${d[chosenXAxis]}<br>${yLabel} ${d[chosenYAxis]}`);
 
         });
 
@@ -256,9 +256,15 @@ d3.csv("./assets/data/data.csv").then(function (health_data, err) {
     // **************
     // Create group for y- axis labels
     var ylabelsGroup = chartGroup.append("g")
-        .attr("transform", `translate(${0 - margin.left / 4}, ${(height / 2)})`);
+            .attr("transform", "rotate(90)")
+            // .attr("y", -5000)
+            // .attr("x", -5000)
+            .classed("axis-text", true)
+        .attr("transform", `translate(${0 - margin.left / 4}, ${(height / 2)}), rotate(90)`);
 
-    var helathcareLabel = ylabelsGroup.append("text")
+
+        
+    var healthcareLabel = ylabelsGroup.append("text")
         .attr("x", 0)
         .attr("y", 20)
         .attr("value", "healthcare") // value to grab for event listener
@@ -380,8 +386,8 @@ d3.csv("./assets/data/data.csv").then(function (health_data, err) {
                 d3.selectAll(".ylabel").classed("active", false).classed("inactive", true);
 
                 // activate selected
-                if (chosenYAxis === "health") {
-                    healthLabel
+                if (chosenYAxis === "healthcare") {
+                    healthcareLabel
                         .classed("active", true)
                         .classed("inactive", false);
                 } else if (chosenYAxis === "obesity") {
